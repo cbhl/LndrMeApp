@@ -12,6 +12,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GalaSoft.MvvmLight.Command;
 
 namespace LndrMeApp
 {
@@ -146,6 +147,12 @@ namespace LndrMeApp
                     NotifyPropertyChanged("FreeAt");
                 }
             }
+        }
+
+        public ICommand ClaimCommand
+        {
+            get;
+            set;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

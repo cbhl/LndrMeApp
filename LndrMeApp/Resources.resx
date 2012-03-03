@@ -132,6 +132,9 @@
   <data name="Available" xml:space="preserve">
     <value>available</value>
   </data>
+  <data name="DefaultEMail" xml:space="preserve">
+    <value>test@example.com</value>
+  </data>
   <data name="HalfAMinute" xml:space="preserve">
     <value>half a minute</value>
   </data>

@@ -106,6 +106,15 @@ namespace LndrMeApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to test@example.com.
+        /// </summary>
+        internal static string DefaultEMail {
+            get {
+                return ResourceManager.GetString("DefaultEMail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to half a minute.
         /// </summary>
         internal static string HalfAMinute {

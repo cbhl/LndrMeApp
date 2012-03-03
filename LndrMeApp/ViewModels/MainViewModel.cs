@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using GalaSoft.MvvmLight.Command;
 
 namespace LndrMeApp
 {
@@ -59,8 +60,27 @@ namespace LndrMeApp
             }
         }
 
+        private void OnClaim(ApplianceViewModel avm)
+        {
+            UriBuilder fullUri = new UriBuilder("http://lndr.me/receive.json");
+            fullUri.Query = String.Format("key={0}&id={1}&email={2}",Resources.ServerKey,avm.Id,Resources.DefaultEMail);
+
+            // initialize a new WebRequest
+            HttpWebRequest lndrRequest = (HttpWebRequest)WebRequest.Create(fullUri.Uri);
+
+            // set up the state object for the async request
+            LndrUpdateState lndrUpdateState = new LndrUpdateState();
+            lndrUpdateState.AsyncRequest = lndrRequest;
+
+            // start the asynchronous request
+            lndrRequest.BeginGetResponse(new AsyncCallback(HandleUpdateResponse),
+                lndrUpdateState);
+        }
+
         private void AddAppliance(ApplianceViewModel avm)
         {
+            avm.ClaimCommand = new RelayCommand(() =>
+                OnClaim(avm));
             this.AllAppliances.Add(avm);
             switch (avm.Appliance)
             {
@@ -73,6 +93,13 @@ namespace LndrMeApp
             }
         }
 
+        public void Clear()
+        {
+            this.AllAppliances.Clear();
+            this.Dryers.Clear();
+            this.Washers.Clear();
+        }
+
         /// <summary>
         /// Creates and adds a few ItemViewModel objects into the Items collection.
         /// </summary>
@@ -83,8 +110,9 @@ namespace LndrMeApp
             //AddAppliance(new ApplianceViewModel() { Appliance = ApplianceViewModel.ApplianceType.WASHER, Id = 2, Name = "Washer 2", Busy = true, FreeAt = DateTime.Now.AddHours(1.2) });
             //AddAppliance(new ApplianceViewModel() { Appliance = ApplianceViewModel.ApplianceType.DRYER, Id = 3, Name = "Dryer 1", Busy = true, FreeAt = DateTime.Now.AddMinutes(42) });
             //AddAppliance(new ApplianceViewModel() { Appliance = ApplianceViewModel.ApplianceType.DRYER, Id = 4, Name = "Dryer 2", Busy = false, FreeAt = DateTime.Now });
-            
-            //this.IsDataLoaded = true;
+
+            this.IsDataLoaded = false;
+            Clear();
 
             UriBuilder fullUri = new UriBuilder(Resources.ServerBaseURI + Resources.ServerStatusEndpoint);
             fullUri.Query = String.Format("key={0}", Resources.ServerKey);
@@ -99,9 +127,33 @@ namespace LndrMeApp
             // start the asynchronous request
             lndrRequest.BeginGetResponse(new AsyncCallback(HandleIndexResponse),
                 lndrUpdateState);
+        }
 
-            //UriBuilder fullUri = new UriBuilder("http://lndr.me/receive.json");
-            //fullUri.Query = String.Format("key={0}&id={1}&email={2}");
+        /// <summary>
+        /// Handle the information returned from the async request
+        /// </summary>
+        /// <param name="asyncResult"></param>
+        private void HandleUpdateResponse(IAsyncResult asyncResult)
+        {
+            LndrUpdateState lndrUpdateState = (LndrUpdateState)asyncResult.AsyncState;
+            HttpWebRequest lndrRequest = (HttpWebRequest)lndrUpdateState.AsyncRequest;
+
+            lndrUpdateState.AsyncResponse = (HttpWebResponse)lndrRequest.EndGetResponse(asyncResult);
+
+            try {
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    LoadData();
+                }
+                );
+
+            }
+            catch (FormatException)
+            {
+                // there was some kind of error processing the response from the web
+                // additional error handling would normally be added here
+                return;
+            }
         }
 
         /// <summary>

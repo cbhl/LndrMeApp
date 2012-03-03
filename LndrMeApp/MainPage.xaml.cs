@@ -60,5 +60,15 @@ namespace LndrMeApp
                 MainProgressBar.Visibility = App.ViewModel.IsDataLoaded ? Visibility.Collapsed : Visibility.Visible;
             }
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem mi = (MenuItem)sender;
+        }
+
+        private void ApplicationBarMenuItem_Refresh_Click(object sender, EventArgs e)
+        {
+            App.ViewModel.LoadData();
+        }
     }
 }
