@@ -15,8 +15,8 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <ProgressBar Name="MainProgressBar" />
+    <Grid x:Name="LayoutRoot">
+        <ProgressBar Name="MainProgressBar" Foreground="{StaticResource PhoneForegroundBrush}" />
         <!--Pivot Control-->
         <controls:Pivot Title="LNDR.ME">
             <!--Pivot item one-->

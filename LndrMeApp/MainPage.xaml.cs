@@ -20,6 +20,17 @@ namespace LndrMeApp
         {
             InitializeComponent();
 
+            Visibility v = (Visibility)Resources["PhoneLightThemeVisibility"];
+            if (v == System.Windows.Visibility.Visible)
+            {
+                // Light theme
+            }
+            else
+            {
+                // Dark theme
+                LayoutRoot.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0x23, 0x39, 0x5B));
+            }
+
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
