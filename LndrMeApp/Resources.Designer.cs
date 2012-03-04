@@ -97,6 +97,15 @@ namespace LndrMeApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 0.1.0.0.
+        /// </summary>
+        internal static string AppVersion {
+            get {
+                return ResourceManager.GetString("AppVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to available.
         /// </summary>
         internal static string Available {

@@ -74,7 +74,8 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="Refresh" Click="ApplicationBarMenuItem_Refresh_Click" />
+                <shell:ApplicationBarMenuItem Text="Refresh" Click="ApplicationBarMenuItem_Refresh_Click" /> 
+                <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarMenuItem_About_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

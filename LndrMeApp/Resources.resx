@@ -129,6 +129,9 @@
   <data name="AboutOneYear" xml:space="preserve">
     <value>about 1 year</value>
   </data>
+  <data name="AppVersion" xml:space="preserve">
+    <value>0.1.0.0</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>available</value>
   </data>

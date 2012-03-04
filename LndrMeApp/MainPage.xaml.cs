@@ -70,5 +70,10 @@ namespace LndrMeApp
         {
             App.ViewModel.LoadData();
         }
+
+        private void ApplicationBarMenuItem_About_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+        }
     }
 }
