@@ -97,7 +97,7 @@ namespace LndrMeApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.1.0.0.
+        ///   Looks up a localized string similar to 0.1.1.0.
         /// </summary>
         internal static string AppVersion {
             get {
