@@ -25,13 +25,10 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <TextBlock Name="VersionTextBlock" FontSize="24" Text="Version: loading..." Grid.Row="1" />
-                    <TextBlock FontSize="24" Text="Get Involved" Grid.Row="2" Padding="0,32,0,0" />
-                    <TextBlock Text="https://github.com/cbhl/LndrMeApp" Grid.Row="3" Margin="8,0,0,0" />
+                    <TextBlock Name="VersionTextBlock" FontSize="24" Text="Version: loading..." Grid.Row="0" />
+                    <TextBlock FontSize="24" Text="Get Involved" Grid.Row="1" Padding="0,32,0,0" />
+                    <TextBlock Text="https://github.com/cbhl/LndrMeApp" Grid.Row="2" Margin="8,0,0,0" />
                 </Grid>
             </controls:PivotItem>
 

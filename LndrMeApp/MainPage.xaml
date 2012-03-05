@@ -73,10 +73,8 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="Refresh" Click="ApplicationBarMenuItem_Refresh_Click" /> 
-                <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarMenuItem_About_Click" />
-            </shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton x:Name="RefreshButton" IconUri="/icons/appbar.refresh.rest.png" Text="refresh" Click="ApplicationBarMenuItem_Refresh_Click"/>
+            <shell:ApplicationBarIconButton x:Name="SettingsButton" IconUri="/icons/appbar.feature.settings.rest.png" Text="settings" Click="ApplicationBarMenuItem_About_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

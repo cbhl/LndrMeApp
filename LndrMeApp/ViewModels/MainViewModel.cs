@@ -179,6 +179,7 @@ namespace LndrMeApp
 
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                     {
+                        Clear();
                         foreach (ApplianceViewModel appliance in appliances)
                         {
                             AddAppliance(appliance);
