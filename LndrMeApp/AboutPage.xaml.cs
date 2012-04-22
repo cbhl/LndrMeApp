@@ -25,6 +25,12 @@ namespace LndrMeApp
 
         public AboutPage()
         {
+            // Save server settings for when the back button is pressed.
+            appSettings = new AppSettings();
+            initialCustomServerUrl = appSettings.CustomAPIServerSetting;
+            initialCustomServerKey = appSettings.CustomAPIKeySetting;
+            selectedServerIndex = appSettings.APIServerSetting;
+
             InitializeComponent();
 
             Visibility v = (Visibility)Resources["PhoneLightThemeVisibility"];
@@ -40,10 +46,9 @@ namespace LndrMeApp
 
             VersionTextBlock.Text = "Version: " + LndrMeApp.Resources.AppVersion;
 
-            appSettings = new AppSettings();
-            selectedServerIndex = appSettings.APIServerSetting;
-            initialCustomServerUrl = appSettings.CustomAPIServerSetting;
-            initialCustomServerKey = appSettings.CustomAPIKeySetting;
+            // FIXME: Hack to get ListBox to show the correct item even though the items are populated after SelectedIndex is set.
+            ApiServerListBox.SelectedIndex = 0;
+            ApiServerListBox.SelectedIndex = selectedServerIndex;
 
             // Add an Application Bar that has a 'done' confirmation button and 
             // a 'cancel' button
@@ -52,11 +57,11 @@ namespace LndrMeApp
             ApplicationBar.IsVisible = true;
             ApplicationBar.Opacity = 1.0;
 
-            ApplicationBarIconButton doneButton = new ApplicationBarIconButton(new Uri("/Images/appbar.check.rest.png", UriKind.Relative));
+            ApplicationBarIconButton doneButton = new ApplicationBarIconButton(new Uri("/icons/appbar.check.rest.png", UriKind.Relative));
             doneButton.Text = "done";
             doneButton.Click += new EventHandler(doneButton_Click);
 
-            ApplicationBarIconButton cancelButton = new ApplicationBarIconButton(new Uri("/Images/appbar.cancel.rest.png", UriKind.Relative));
+            ApplicationBarIconButton cancelButton = new ApplicationBarIconButton(new Uri("/icons/appbar.cancel.rest.png", UriKind.Relative));
             cancelButton.Text = "cancel";
             cancelButton.Click += new EventHandler(cancelButton_Click);
 
@@ -73,12 +78,18 @@ namespace LndrMeApp
                 {
                     case 0:
                     case 1:
+                        CustomApiServerTextBox.Text = appSettings.CurrentAPIServer;
+                        CustomApiKeyTextBox.Text = appSettings.CurrentAPIKey;
                         CustomApiServerTextBox.IsEnabled = false;
                         CustomApiKeyTextBox.IsEnabled = false;
+                        CustomApiKeyTextBox.Visibility = CustomApiKeyTextBlock.Visibility = System.Windows.Visibility.Collapsed;
                         break;
                     default:
+                        CustomApiServerTextBox.Text = appSettings.CurrentAPIServer;
+                        CustomApiKeyTextBox.Text = appSettings.CurrentAPIKey;
                         CustomApiServerTextBox.IsEnabled = true;
                         CustomApiKeyTextBox.IsEnabled = true;
+                        CustomApiKeyTextBox.Visibility = CustomApiKeyTextBlock.Visibility = System.Windows.Visibility.Visible;
                         break;
                 }
             }

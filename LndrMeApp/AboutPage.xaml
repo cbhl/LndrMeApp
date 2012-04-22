@@ -5,6 +5,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     
@@ -27,7 +28,23 @@
         <controls:Pivot Title="LNDR.ME">
             <!--Pivot item one-->
             <controls:PivotItem Header="settings">
-                <Grid Margin="60,0,0,0">
+                <Grid Margin="15,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,0,0,0" Name="FirstNameTextBlock" Text="First Name" />
+                    <TextBox Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Name="FirstNameTextBox" Text="{Binding Path=FirstNameSetting, Mode=OneWay, Source={StaticResource appSettings}}" />
+                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,0,0,0" Name="EmailAddressTextBlock" Text="Email Address" />
+                    <TextBox Grid.Column="0" Grid.Row="3" Margin="0,0,0,0" Name="EmailAddressTextBox" Text="{Binding Path=EmailAddressSetting, Mode=OneWay, Source={StaticResource appSettings}}" />
+                    <CheckBox Grid.Column="0" Grid.Row="4" Margin="0,0,0,0" Name="SendEmailCheckBox" Content="Send Email Reminders" IsChecked="{Binding Path=SendEmailSetting, Mode=OneWay, Source={StaticResource appSettings}}" />
+                </Grid>
+            </controls:PivotItem>
+            <controls:PivotItem Header="server">
+                <Grid Margin="15,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -35,34 +52,23 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,12,0,0" Name="FirstNameTextBlock" Text="First Name" />
-                    <TextBox Grid.Column="0" Grid.Row="1" Margin="0,0,0,20" Name="FirstNameTextBox" Text="{Binding Path=FirstNameSetting, Mode=OneWay, Source={StaticResource appSettings}}" />
-                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,12,0,0" Name="EmailAddressTextBlock" Text="Email Address" />
-                    <TextBox Grid.Column="0" Grid.Row="3" Margin="0,0,0,20" Name="EmailAddressTextBox" Text="{Binding Path=EmailAddressSetting, Mode=OneWay, Source={StaticResource appSettings}}" />
-                    <CheckBox Grid.Column="0" Grid.Row="4" Margin="0,0,0,20" Name="SendEmailCheckBox" Content="Send Email Reminders" IsChecked="{Binding Path=SendEmailSetting, Mode=OneWay, Source={StaticResource appSettings}}" />
-                    <TextBlock Grid.Column="0" Grid.Row="5" Margin="5,12,0,0" Name="ApiServerTextBlock" Text="Lndr.me API Server" />
-                    <ListBox Grid.Column="0" Grid.Row="6" Margin="0,0,0,20" Name="ApiServerListBox" SelectedIndex="{Binding Path=APIServerSetting, Mode=OneWay, Source={StaticResource appSettings}}" SelectionChanged="ApiServerListBox_SelectionChanged">
-                        <ListBoxItem Content="http://lndr.me/" FontSize="24" />
-                        <ListBoxItem Content="http://lndrme.iterate.ca/" FontSize="24" />
-                        <ListBoxItem Content="(custom)" FontSize="24" />
-                    </ListBox>
-                    <TextBlock Grid.Column="0" Grid.Row="8" Margin="5,12,0,0" Name="CustomApiServerTextBlock" Text="Lndr.me API Server" />
-                    <TextBox Grid.Column="0" Grid.Row="9" Margin="0,0,0,20" Name="CustomApiServerTextBox" Text="{Binding Path=CurrentAPIServer, Mode=OneWay, Source={StaticResource appSettings}}" />
-                    <TextBlock Grid.Column="0" Grid.Row="10" Margin="5,12,0,0" Name="CustomApiKeyTextBlock" Text="Lndr.me API Key" />
-                    <TextBox Grid.Column="0" Grid.Row="11" Margin="0,0,0,20" Name="CustomApiKeyTextBox" Text="{Binding Path=CurrentAPIKey, Mode=OneWay, Source={StaticResource appSettings}}" />
+                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,0,0,0" Name="ApiServerTextBlock" Text="Lndr.me API Server" />
+                    <toolkit:ListPicker Grid.Column="0" Grid.Row="1" Margin="10,0,10,0" Name="ApiServerListBox" SelectedIndex="{Binding Path=APIServerSetting, Mode=OneWay, Source={StaticResource appSettings}}" SelectionChanged="ApiServerListBox_SelectionChanged">
+                        <toolkit:ListPickerItem Content="lndr.me (default)" FontSize="24" />
+                        <toolkit:ListPickerItem Content="lndrme.iterate.ca" FontSize="24" />
+                        <toolkit:ListPickerItem Content="(custom)" FontSize="24" />
+                    </toolkit:ListPicker>
+                    <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,0,0,0" Name="CustomApiServerTextBlock" Text="API Server URL" />
+                    <TextBox Grid.Column="0" Grid.Row="3" Margin="0,0,0,0" Name="CustomApiServerTextBox" />
+                    <TextBlock Grid.Column="0" Grid.Row="4" Margin="5,0,0,0" Name="CustomApiKeyTextBlock" Text="API Server Key" />
+                    <TextBox Grid.Column="0" Grid.Row="5" Margin="0,0,0,0" Name="CustomApiKeyTextBox" />
                 </Grid>
             </controls:PivotItem>
             
             <!--Pivot item two-->
             <controls:PivotItem Header="about">
-                <Grid Margin="16,0,0,0">
+                <Grid Margin="15,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
