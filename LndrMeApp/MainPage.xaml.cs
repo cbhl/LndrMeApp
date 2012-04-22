@@ -48,6 +48,7 @@ namespace LndrMeApp
             }else{
                 MainProgressBar.IsIndeterminate = true;
                 MainProgressBar.Visibility = Visibility.Visible;
+                NoAppliancesTextBox1.Visibility = NoAppliancesTextBox2.Visibility = NoAppliancesTextBox3.Visibility = Visibility.Collapsed;
                 App.ViewModel.LoadData();
             }
         }
@@ -58,6 +59,10 @@ namespace LndrMeApp
             {
                 MainProgressBar.IsIndeterminate = !App.ViewModel.IsDataLoaded;
                 MainProgressBar.Visibility = App.ViewModel.IsDataLoaded ? Visibility.Collapsed : Visibility.Visible;
+                if (App.ViewModel.IsDataLoaded)
+                {
+                    NoAppliancesTextBox1.Visibility = NoAppliancesTextBox2.Visibility = NoAppliancesTextBox3.Visibility = (App.ViewModel.AllAppliances.Count > 0 ? Visibility.Collapsed : Visibility.Visible);
+                }
             }
         }
 

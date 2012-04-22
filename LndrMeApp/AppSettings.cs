@@ -173,9 +173,9 @@ namespace LndrMeApp
                 switch (APIServerSetting)
                 {
                     case 0:
-                        return "http://lndr.me/";
+                        return "http://lndr.me";
                     case 1:
-                        return "http://lndrme.iterate.ca/";
+                        return "http://lndrme.iterate.ca";
                     default:
                         return CustomAPIServerSetting;
                 }

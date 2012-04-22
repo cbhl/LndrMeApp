@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,8 +22,11 @@ namespace LndrMeApp
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        AppSettings appSettings;
+
         public MainViewModel()
         {
+            this.appSettings = new AppSettings();
             this.AllAppliances = new ObservableCollection<ApplianceViewModel>();
             this.Washers = new ObservableCollection<ApplianceViewModel>();
             this.Dryers = new ObservableCollection<ApplianceViewModel>();
@@ -62,19 +66,26 @@ namespace LndrMeApp
 
         private void OnClaim(ApplianceViewModel avm)
         {
-            UriBuilder fullUri = new UriBuilder("http://lndr.me/receive.json");
-            fullUri.Query = String.Format("key={0}&id={1}&email={2}",Resources.ServerKey,avm.Id,Resources.DefaultEMail);
+            if (NetworkInterface.GetIsNetworkAvailable())
+            {
+                UriBuilder fullUri = new UriBuilder(appSettings.CurrentAPIServer + "/receive.json");
+                fullUri.Query = String.Format("key={0}&id={1}&name={2}&email={3}&send_email={4}", Uri.EscapeDataString(appSettings.CurrentAPIKey), avm.Id, Uri.EscapeDataString(appSettings.FirstNameSetting), Uri.EscapeDataString(appSettings.EmailAddressSetting), appSettings.SendEmailSetting);
 
-            // initialize a new WebRequest
-            HttpWebRequest lndrRequest = (HttpWebRequest)WebRequest.Create(fullUri.Uri);
+                // initialize a new WebRequest
+                HttpWebRequest lndrRequest = (HttpWebRequest)WebRequest.Create(fullUri.Uri);
 
-            // set up the state object for the async request
-            LndrUpdateState lndrUpdateState = new LndrUpdateState();
-            lndrUpdateState.AsyncRequest = lndrRequest;
+                // set up the state object for the async request
+                LndrUpdateState lndrUpdateState = new LndrUpdateState();
+                lndrUpdateState.AsyncRequest = lndrRequest;
 
-            // start the asynchronous request
-            lndrRequest.BeginGetResponse(new AsyncCallback(HandleUpdateResponse),
-                lndrUpdateState);
+                // start the asynchronous request
+                lndrRequest.BeginGetResponse(new AsyncCallback(HandleUpdateResponse),
+                    lndrUpdateState);
+            }
+            else
+            {
+                LoadData();
+            }
         }
 
         private void AddAppliance(ApplianceViewModel avm)
@@ -114,19 +125,27 @@ namespace LndrMeApp
             this.IsDataLoaded = false;
             Clear();
 
-            UriBuilder fullUri = new UriBuilder(Resources.ServerBaseURI + Resources.ServerStatusEndpoint);
-            fullUri.Query = String.Format("key={0}", Resources.ServerKey);
+            if (NetworkInterface.GetIsNetworkAvailable())
+            {
 
-            // initialize a new WebRequest
-            HttpWebRequest lndrRequest = (HttpWebRequest)WebRequest.Create(fullUri.Uri);
+                UriBuilder fullUri = new UriBuilder(appSettings.CurrentAPIServer + "/" + Resources.ServerStatusEndpoint);
+                fullUri.Query = String.Format("key={0}", Uri.EscapeDataString(appSettings.CurrentAPIKey));
 
-            // set up the state object for the async request
-            LndrUpdateState lndrUpdateState = new LndrUpdateState();
-            lndrUpdateState.AsyncRequest = lndrRequest;
+                // initialize a new WebRequest
+                HttpWebRequest lndrRequest = (HttpWebRequest)WebRequest.Create(fullUri.Uri);
 
-            // start the asynchronous request
-            lndrRequest.BeginGetResponse(new AsyncCallback(HandleIndexResponse),
-                lndrUpdateState);
+                // set up the state object for the async request
+                LndrUpdateState lndrUpdateState = new LndrUpdateState();
+                lndrUpdateState.AsyncRequest = lndrRequest;
+
+                // start the asynchronous request
+                lndrRequest.BeginGetResponse(new AsyncCallback(HandleIndexResponse),
+                    lndrUpdateState);
+            }
+            else
+            {
+                this.IsDataLoaded = true;
+            }
         }
 
         /// <summary>

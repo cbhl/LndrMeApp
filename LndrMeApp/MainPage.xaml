@@ -22,6 +22,12 @@
         <controls:Pivot Title="LNDR.ME">
             <!--Pivot item one-->
             <controls:PivotItem Header="all">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                
+                <TextBlock Text="No appliances found." Name="NoAppliancesTextBox1" Visibility="Collapsed" />
                 <!--Double line list with text wrapping-->
                 <ListBox x:Name="FirstListBox" Margin="0,0,-12,0" ItemsSource="{Binding AllAppliances}">
                     <ListBox.ItemTemplate>
@@ -38,35 +44,48 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
+                </Grid>
             </controls:PivotItem>
  
             <!--Pivot item two-->
-            <controls:PivotItem Header="washers"> 
-                <!--Triple line list no text wrapping-->
+            <controls:PivotItem Header="washers">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="No appliances found." Name="NoAppliancesTextBox2" Visibility="Collapsed" />
                     <ListBox x:Name="SecondListBox" Margin="0,0,-12,0" ItemsSource="{Binding Washers}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <TextBlock Text="{Binding Status}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                            </StackPanel>
+                                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                    <TextBlock Text="{Binding Status}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+                </Grid>
             </controls:PivotItem>
 
             <controls:PivotItem Header="dryers">
-                <!--Triple line list no wrapping-->
-                <ListBox x:Name="ThirdListBox" Margin="0,0,-12,0" ItemsSource="{Binding Dryers}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <TextBlock Text="{Binding Status}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="No appliances found." Name="NoAppliancesTextBox3" Visibility="Collapsed" />
+                    <ListBox x:Name="ThirdListBox" Margin="0,0,-12,0" ItemsSource="{Binding Dryers}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,17">
+                                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                    <TextBlock Text="{Binding Status}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>
