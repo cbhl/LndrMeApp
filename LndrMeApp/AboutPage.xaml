@@ -46,7 +46,7 @@
                     <TextBox Grid.Column="0" Grid.Row="1" Margin="0,0,0,20" Name="FirstNameTextBox" Text="{Binding Path=FirstNameSetting, Mode=OneWay, Source={StaticResource appSettings}}" />
                     <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,12,0,0" Name="EmailAddressTextBlock" Text="Email Address" />
                     <TextBox Grid.Column="0" Grid.Row="3" Margin="0,0,0,20" Name="EmailAddressTextBox" Text="{Binding Path=EmailAddressSetting, Mode=OneWay, Source={StaticResource appSettings}}" />
-                    <CheckBox Grid.Column="0" Grid.Row="4" Margin="0,0,0,20" Name="SendEmailCheckBox" Content="Send Email Reminders" Checked="{Binding Path=SendEmailSetting, Mode=OneWay, Source={StaticResource appSettings}}" />
+                    <CheckBox Grid.Column="0" Grid.Row="4" Margin="0,0,0,20" Name="SendEmailCheckBox" Content="Send Email Reminders" IsChecked="{Binding Path=SendEmailSetting, Mode=OneWay, Source={StaticResource appSettings}}" />
                     <TextBlock Grid.Column="0" Grid.Row="5" Margin="5,12,0,0" Name="ApiServerTextBlock" Text="Lndr.me API Server" />
                     <ListBox Grid.Column="0" Grid.Row="6" Margin="0,0,0,20" Name="ApiServerListBox" SelectedIndex="{Binding Path=APIServerSetting, Mode=OneWay, Source={StaticResource appSettings}}" SelectionChanged="ApiServerListBox_SelectionChanged">
                         <ListBoxItem Content="http://lndr.me/" FontSize="24" />

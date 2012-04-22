@@ -66,33 +66,39 @@ namespace LndrMeApp
 
         private void ValidateApiServerControls()
         {
-            // update UI
-            switch (appSettings.APIServerSetting)
+            if ((CustomApiServerTextBox != null) && (CustomApiKeyTextBox != null))
             {
-                case 0:
-                case 1:
-                    CustomApiServerTextBox.IsEnabled = false;
-                    CustomApiKeyTextBox.IsEnabled = false;
-                    break;
-                default:
-                    CustomApiServerTextBox.IsEnabled = true;
-                    CustomApiKeyTextBox.IsEnabled = true;
-                    break;
+                // update UI
+                switch (appSettings.APIServerSetting)
+                {
+                    case 0:
+                    case 1:
+                        CustomApiServerTextBox.IsEnabled = false;
+                        CustomApiKeyTextBox.IsEnabled = false;
+                        break;
+                    default:
+                        CustomApiServerTextBox.IsEnabled = true;
+                        CustomApiKeyTextBox.IsEnabled = true;
+                        break;
+                }
             }
         }
 
         private void ApiServerListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // update UI
-            switch (ApiServerListBox.SelectedIndex)
+            if (ApiServerListBox != null)
             {
-                case 0:
-                case 1:
-                    appSettings.APIServerSetting = ApiServerListBox.SelectedIndex;
-                    break;
-                default:
-                    appSettings.APIServerSetting = 2;
-                    break;
+                // update UI
+                switch (ApiServerListBox.SelectedIndex)
+                {
+                    case 0:
+                    case 1:
+                        appSettings.APIServerSetting = ApiServerListBox.SelectedIndex;
+                        break;
+                    default:
+                        appSettings.APIServerSetting = 2;
+                        break;
+                }
             }
 
             ValidateApiServerControls();
