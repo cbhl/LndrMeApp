@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO.IsolatedStorage;
 using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Net;
 using System.Windows;
@@ -27,8 +28,8 @@ namespace LndrMeApp
         const string CustomAPIKeySettingKeyName = "CustomAPIKeySetting";
 
         // defaults
-        const string FirstNameSettingDefault = "";
-        const string EmailAddressSettingDefault = "";
+        const string FirstNameSettingDefault = "User";
+        const string EmailAddressSettingDefault = "user@localhost";
         const bool SendEmailSettingDefault = false;
         const int APIServerSettingDefault = 0;
         const string CustomAPIServerSettingDefault = "";
@@ -36,7 +37,10 @@ namespace LndrMeApp
 
         public AppSettings()
         {
-            settings = IsolatedStorageSettings.ApplicationSettings;
+            if (!DesignerProperties.IsInDesignTool)
+            {
+                settings = IsolatedStorageSettings.ApplicationSettings;
+            }
         }
 
         /// <summary>
@@ -83,7 +87,7 @@ namespace LndrMeApp
             T value;
 
             // If the key exists, retrieve the value.
-            if (settings.Contains(Key))
+            if ((!DesignerProperties.IsInDesignTool) && (settings.Contains(Key)))
             {
                 value = (T)settings[Key];
             }
