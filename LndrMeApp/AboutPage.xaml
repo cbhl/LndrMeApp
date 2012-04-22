@@ -7,6 +7,9 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    
+    xmlns:local="clr-namespace:LndrMeApp"
+    
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -14,11 +17,20 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
+    <phone:PhoneApplicationPage.Resources>
+        <local:AppSettings x:Key="appSettings"></local:AppSettings>
+    </phone:PhoneApplicationPage.Resources>
+    
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <controls:Pivot Title="LNDR.ME">
             <!--Pivot item one-->
+            <controls:PivotItem Header="settings">
+                <Grid/>
+            </controls:PivotItem>
+            
+            <!--Pivot item two-->
             <controls:PivotItem Header="about">
                 <Grid Margin="16,0,0,0">
                     <Grid.RowDefinitions>
@@ -31,11 +43,6 @@
                     <TextBlock Text="https://github.com/cbhl/LndrMeApp" Grid.Row="2" Margin="8,0,0,0" />
                 </Grid>
             </controls:PivotItem>
-
-            <!--Pivot item two-->
-            <!--<controls:PivotItem Header="item2">
-                <Grid/>
-            </controls:PivotItem>-->
         </controls:Pivot>
     </Grid>
 
