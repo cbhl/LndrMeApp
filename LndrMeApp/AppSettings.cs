@@ -25,20 +25,17 @@ namespace LndrMeApp
         const string APIServerSettingKeyName = "APIServerSetting";
         const string APIKeySettingKeyName = "APIKeySetting";
 
-        // server defaults
-        const string DEFAULT_API_SERVER = "http://lndr.me/";
-        const string DEFAULT_API_KEY = "y9dghu2e9hdgw9g2iowdghh89982gijb";
-        const string STAGING_API_SERVER = "http://lndrme.iterate.ca/";
-        const string STAGING_API_KEY = "ydnjbkfavphbgeheyk0zeof6lr0biu";
-
         // defaults
         const string FirstNameSettingDefault = "";
         const string EmailAddressSettingDefault = "";
         const bool SendEmailSettingDefault = false;
-        // const string APIServerSettingDefault = DEFAULT_API_SERVER;
-        // const string APIKeySettingDefault = DEFAULT_API_KEY;
-        const string APIServerSettingDefault = STAGING_API_SERVER;
-        const string APIKeySettingDefault = STAGING_API_KEY;
+        
+        // production
+        // const string APIServerSettingDefault = "http://lndr.me/";
+        // const string APIKeySettingDefault = "y9dghu2e9hdgw9g2iowdghh89982gijb";
+        // staging
+        const string APIServerSettingDefault = "http://lndrme.iterate.ca/";
+        const string APIKeySettingDefault = "ydnjbkfavphbgeheyk0zeof6lr0biu";
 
         public AppSettings()
         {
