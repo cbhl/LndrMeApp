@@ -23,19 +23,16 @@ namespace LndrMeApp
         const string EmailAddressSettingKeyName = "EmailAddressSetting";
         const string SendEmailSettingKeyName = "SendEmailSetting";
         const string APIServerSettingKeyName = "APIServerSetting";
-        const string APIKeySettingKeyName = "APIKeySetting";
+        const string CustomAPIServerSettingKeyName = "CustomAPIServerSetting";
+        const string CustomAPIKeySettingKeyName = "CustomAPIKeySetting";
 
         // defaults
         const string FirstNameSettingDefault = "";
         const string EmailAddressSettingDefault = "";
         const bool SendEmailSettingDefault = false;
-        
-        // production
-        // const string APIServerSettingDefault = "http://lndr.me/";
-        // const string APIKeySettingDefault = "y9dghu2e9hdgw9g2iowdghh89982gijb";
-        // staging
-        const string APIServerSettingDefault = "http://lndrme.iterate.ca/";
-        const string APIKeySettingDefault = "ydnjbkfavphbgeheyk0zeof6lr0biu";
+        const int APIServerSettingDefault = 0;
+        const string CustomAPIServerSettingDefault = "";
+        const string CustomAPIKeySettingDefault = "";
 
         public AppSettings()
         {
@@ -150,11 +147,11 @@ namespace LndrMeApp
             }
         }
 
-        public string APIServerSetting
+        public int APIServerSetting
         {
             get
             {
-                return GetValueOrDefault<string>(APIServerSettingKeyName, APIServerSettingDefault);
+                return GetValueOrDefault<int>(APIServerSettingKeyName, APIServerSettingDefault);
             }
             set
             {
@@ -165,15 +162,59 @@ namespace LndrMeApp
             }
         }
 
-        public string APIKeySetting
+        public string CurrentAPIServer
         {
             get
             {
-                return GetValueOrDefault<string>(APIKeySettingKeyName, APIKeySettingDefault);
+                switch (APIServerSetting)
+                {
+                    case 0:
+                        return "http://lndr.me/";
+                    case 1:
+                        return "http://lndrme.iterate.ca/";
+                    default:
+                        return CustomAPIServerSetting;
+                }
+            }
+        }
+
+        public string CurrentAPIKey
+        {
+            get
+            {
+                switch (APIServerSetting)
+                {
+                    case 0:
+                        return "y9dghu2e9hdgw9g2iowdghh89982gijb";
+                    case 1:
+                        return "ydnjbkfavphbgeheyk0zeof6lr0biu";
+                    default:
+                        return CustomAPIServerSetting;
+                }
+            }
+        }
+
+        public string CustomAPIServerSetting
+        {
+            get
+            {
+                return GetValueOrDefault<string>(CustomAPIServerSettingKeyName, CustomAPIServerSettingDefault);
             }
             set
             {
-                if (AddOrUpdateValue(APIKeySettingKeyName, value))
+
+            }
+        }
+
+        public string CustomAPIKeySetting
+        {
+            get
+            {
+                return GetValueOrDefault<string>(CustomAPIKeySettingKeyName, CustomAPIKeySettingDefault);
+            }
+            set
+            {
+                if (AddOrUpdateValue(CustomAPIKeySettingKeyName, value))
                 {
                     Save();
                 }
