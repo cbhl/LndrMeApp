@@ -57,7 +57,9 @@
                     <toolkit:ListPicker Grid.Column="0" Grid.Row="1" Margin="10,0,10,0" Name="ApiServerListBox" SelectedIndex="{Binding Path=APIServerSetting, Mode=OneWay, Source={StaticResource appSettings}}" SelectionChanged="ApiServerListBox_SelectionChanged">
                         <toolkit:ListPickerItem Content="lndr.me (default)" FontSize="24" />
                         <toolkit:ListPickerItem Content="lndrme.iterate.ca" FontSize="24" />
+                        <!--
                         <toolkit:ListPickerItem Content="(custom)" FontSize="24" />
+                        -->
                     </toolkit:ListPicker>
                     <TextBlock Grid.Column="0" Grid.Row="2" Margin="5,0,0,0" Name="CustomApiServerTextBlock" Text="API Server URL" />
                     <TextBox Grid.Column="0" Grid.Row="3" Margin="0,0,0,0" Name="CustomApiServerTextBox" />
